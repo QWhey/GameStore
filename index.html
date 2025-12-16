@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameStore - Магазин видеоигр</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo" data-page="home">
+                    <i class="fas fa-gamepad"></i>
+                    <span>GameStore</span>
+                </a>
+                
+                <nav>
+                    <ul>
+                        <li><a href="#" class="nav-link active" data-page="home">Главная</a></li>
+                        <li><a href="#" class="nav-link" data-page="catalog">Каталог игр</a></li>
+                        <li><a href="#" class="nav-link" data-page="account" id="account-nav-link" style="display: none;">Мой аккаунт</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="header-actions">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="search-input" placeholder="Поиск игр...">
+                    </div>
+                    <div class="user-icon" id="user-icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="cart-icon" data-page="cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Основной контент -->
+    <main class="container">
+        <div id="home" class="page active fade-in">
+            <h1 class="page-title">Лучшие игры для настоящих геймеров</h1>
+            
+            <!-- Карусель популярных игр -->
+            <section class="carousel-section">
+                <h2 class="section-title"><i class="fas fa-fire"></i> Популярные игры</h2>
+                <div class="carousel-container">
+                    <div class="carousel">
+                        <!-- Карусель будет заполнена через JS -->
+                    </div>
+                    <button class="carousel-nav carousel-prev"><i class="fas fa-chevron-left"></i></button>
+                    <button class="carousel-nav carousel-next"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="carousel-indicators">
+                    <!-- Индикаторы будут заполнены через JS -->
+                </div>
+            </section>
+            
+            <!-- Бесплатные игры -->
+            <section class="games-section">
+                <h2 class="section-title"><i class="fas fa-gift"></i> Бесплатные игры</h2>
+                <div class="games-grid" id="free-games">
+                    <!-- Бесплатные игры будут заполнены через JS -->
+                </div>
+            </section>
+            
+            <!-- Игры со скидками -->
+            <section class="games-section">
+                <h2 class="section-title"><i class="fas fa-tag"></i> Спецпредложения</h2>
+                <div class="games-grid" id="discount-games">
+                    <!-- Игры со скидками будут заполнены через JS -->
+                </div>
+            </section>
+        </div>
+        
+        <!-- Страница каталога -->
+        <div id="catalog" class="page fade-in">
+            <h1 class="page-title">Каталог игр</h1>
+            
+            <div class="catalog-controls">
+                <div class="filters">
+                    <select class="filter-select" id="genre-filter">
+                        <option value="">Все жанры</option>
+                        <option value="action">Экшен</option>
+                        <option value="rpg">RPG</option>
+                        <option value="strategy">Стратегия</option>
+                        <option value="sports">Спортивные</option>
+                        <option value="adventure">Приключения</option>
+                        <option value="simulation">Симуляторы</option>
+                        <option value="horror">Хоррор</option>
+                        <option value="racing">Гонки</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="games-grid" id="catalog-games">
+                <!-- Игры каталога будут заполнены через JS -->
+            </div>
+        </div>
+        
+        <!-- Страница корзины -->
+        <div id="cart" class="page fade-in">
+            <h1 class="page-title">Корзина</h1>
+            
+            <div class="cart-container">
+                <div class="cart-items" id="cart-items">
+                    <div class="cart-empty">
+                        <i class="fas fa-shopping-cart"></i>
+                        <h3>Ваша корзина пуста</h3>
+                        <p>Добавьте игры из каталога, чтобы они появились здесь</p>
+                    </div>
+                </div>
+                
+                <div class="cart-summary">
+                    <h3>Итого</h3>
+                    <div class="cart-summary-row">
+                        <span>Товары (0)</span>
+                        <span>0 ₽</span>
+                    </div>
+                    <div class="cart-summary-row">
+                        <span>Скидка</span>
+                        <span>0 ₽</span>
+                    </div>
+                    <div class="cart-summary-row">
+                        <span>Итого к оплате</span>
+                        <span class="cart-summary-total">0 ₽</span>
+                    </div>
+                    <button class="btn btn-success" id="checkout-btn" style="width: 100%; margin-top: 20px;">Оформить заказ</button>
+                    <p style="text-align: center; margin-top: 15px; font-size: 0.9rem; color: #aaa;">Нажимая кнопку, вы соглашаетесь с условиями покупки</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Страница авторизации -->
+        <div id="auth" class="page fade-in">
+            <div class="auth-container">
+                <div class="auth-tabs">
+                    <div class="auth-tab active" data-tab="login">Вход</div>
+                    <div class="auth-tab" data-tab="register">Регистрация</div>
+                </div>
+                
+                <div id="login-form" class="auth-form active">
+                    <h2 class="auth-title">Вход в аккаунт</h2>
+                    
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="login-email" placeholder="Ваш email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Пароль</label>
+                        <input type="password" id="login-password" placeholder="Ваш пароль" required>
+                    </div>
+                    
+                    <div class="form-options">
+                        <label>
+                            <input type="checkbox" id="remember"> Запомнить меня
+                        </label>
+                        <a href="#" id="forgot-password">Забыли пароль?</a>
+                    </div>
+                    
+                    <button type="submit" class="btn" id="login-btn">Войти</button>
+                </div>
+                
+                <div id="register-form" class="auth-form">
+                    <h2 class="auth-title">Регистрация</h2>
+                    
+                    <div class="form-group">
+                        <label for="username">Имя пользователя</label>
+                        <input type="text" id="register-username" placeholder="Придумайте имя пользователя" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="register-email" placeholder="Ваш email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Пароль</label>
+                        <input type="password" id="register-password" placeholder="Придумайте пароль" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirm-password">Подтвердите пароль</label>
+                        <input type="password" id="register-confirm-password" placeholder="Повторите пароль" required>
+                    </div>
+                    
+                    <div class="form-options">
+                        <label>
+                            <input type="checkbox" id="terms" required> Я согласен с условиями использования
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="btn" id="register-btn">Зарегистрироваться</button>
+                </div>
+                
+                <p class="auth-alternative">Или войти с помощью</p>
+                
+                <div class="auth-social">
+                    <div class="social-btn social-google">
+                        <i class="fab fa-google"></i>
+                    </div>
+                    <div class="social-btn social-facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </div>
+                    <div class="social-btn social-twitter">
+                        <i class="fab fa-twitter"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Страница аккаунта -->
+        <div id="account" class="page fade-in">
+            <h1 class="page-title">Мой аккаунт</h1>
+            
+            <div class="account-container">
+                <div class="account-info">
+                    <h2>Информация об аккаунте</h2>
+                    <div class="info-item">
+                        <span class="label">Имя пользователя:</span>
+                        <span id="account-username">ОМБУ</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">Email:</span>
+                        <span id="account-email">Dohseidhi@mail.ru</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">Дата регистрации:</span>
+                        <span id="account-joindate">14.12.2025</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">Куплено игр:</span>
+                        <span id="account-games-count">3</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">Сумма покупок:</span>
+                        <span id="account-total-spent">0 ₽</span>
+                    </div>
+                    <button class="btn btn-danger" id="logout-btn" style="width: 100%; margin-top: 20px;">Выйти из аккаунта</button>
+                </div>
+                
+                <div class="account-games">
+                    <h2>Приобретенные игры</h2>
+                    <div class="games-grid" id="purchased-games">
+                        <div class="cart-empty" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 300px;">
+                            <i class="fas fa-times" style="font-size: 4rem; margin-bottom: 20px; color: var(--gray);"></i>
+                            <h3>У вас нет приобретенных игр</h3>
+                            <p>Приобретите игры в каталоге, чтобы они появились здесь</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Модальное окно с детальной информацией об игре -->
+    <div id="game-modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close">&times;</button>
+            <div class="modal-header">
+                <h2 id="modal-title">Название игры</h2>
+                <div class="game-genre" id="modal-genre">Жанр игры</div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-section">
+                    <div class="video-container" id="modal-video">
+                        <div class="image-placeholder">Видео превью</div>
+                    </div>
+                </div>
+                
+                <div class="modal-section">
+                    <div class="screenshots-grid" id="modal-screenshots">
+                        <!-- Скриншоты будут заполнены через JS -->
+                    </div>
+                </div>
+                
+                <div class="modal-section">
+                    <h3>Описание</h3>
+                    <p class="game-description" id="modal-description">Описание игры будет здесь</p>
+                </div>
+                
+                <div class="modal-section">
+                    <div class="game-info-grid">
+                        <div class="info-item">
+                            <div class="label">Разработчик</div>
+                            <div id="modal-developer">Не указан</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="label">Издатель</div>
+                            <div id="modal-publisher">Не указан</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="label">Дата выхода</div>
+                            <div id="modal-release-date">Не указана</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-section">
+                    <h3>Системные требования (PC)</h3>
+                    <ul class="requirements-list" id="modal-requirements">
+                        <!-- Системные требования будут заполнены через JS -->
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="modal-price" id="modal-price">0 ₽</div>
+                <button class="btn btn-large" id="modal-add-to-cart">Добавить в корзину</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Подвал -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h4>GameStore</h4>
+                    <p style="color: #aaa; margin-bottom: 15px;">Лучший магазин видеоигр для истинных геймеров. Игры для всех платформ по лучшим ценам.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-vk"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Помощь</h4>
+                    <ul>
+                        <li><a href="#">Центр поддержки</a></li>
+                        <li><a href="#">Состояние сервиса</a></li>
+                        <li><a href="#">Политика возврата</a></li>
+                        <li><a href="#">Способы оплаты</a></li>
+                        <li><a href="#">Частые вопросы</a></li>
+                        <li><a href="#">Контакты</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Новости и акции</h4>
+                    <div class="footer-newsletter">
+                        <p>Подпишитесь, чтобы получать новости о скидках и новых играх</p>
+                        <form id="newsletter-form">
+                            <input type="email" placeholder="Ваш email" required>
+                            <button class="btn" type="submit">Подписаться</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div>© 2023 GameStore. Все права защищены.</div>
+                <div>
+                    <a href="#" style="margin-right: 15px;">Политика конфиденциальности</a>
+                    <a href="#">Условия использования</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
