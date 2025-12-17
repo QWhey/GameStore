@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Корзина - GameStore</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="/index.html" class="logo">
+                    <i class="fas fa-gamepad"></i>
+                    <span>GameStore</span>
+                </a>
+                
+                <nav>
+                    <ul>
+                        <li><a href="/index.html" class="nav-link">Главная</a></li>
+                        <li><a href="catalog.html" class="nav-link">Каталог игр</a></li>
+                        <li><a href="account.html" class="nav-link" id="account-nav-link" style="display: none;">Мой аккаунт</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="header-actions">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="search-input" placeholder="Поиск игр..." onkeypress="handleSearch(event)">
+                    </div>
+                    <div class="user-icon" id="user-icon" onclick="redirectToAuthOrAccount()">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <a href="cart.html" class="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cart-count">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Основной контент -->
+    <main class="container">
+        <h1 class="page-title">Корзина</h1>
+        
+        <div class="cart-container">
+            <div class="cart-items" id="cart-items">
+                <!-- Товары в корзине будут заполнены через JS -->
+            </div>
+            
+            <div class="cart-summary">
+                <h3>Итого</h3>
+                <div class="cart-summary-row">
+                    <span>Товары (<span id="total-items">0</span>)</span>
+                    <span id="total-price">0 ₽</span>
+                </div>
+                <div class="cart-summary-row">
+                    <span>Скидка</span>
+                    <span id="total-discount">0 ₽</span>
+                </div>
+                <div class="cart-summary-row">
+                    <span>Итого к оплате</span>
+                    <span class="cart-summary-total" id="final-price">0 ₽</span>
+                </div>
+                <button class="btn btn-success" id="checkout-btn" style="width: 100%; margin-top: 20px;">Оформить заказ</button>
+                <p style="text-align: center; margin-top: 15px; font-size: 0.9rem; color: #aaa;">Нажимая кнопку, вы соглашаетесь с условиями покупки</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Подвал -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h4>GameStore</h4>
+                    <p style="color: #aaa; margin-bottom: 15px;">Лучший магазин видеоигр для истинных геймеров. Игры для всех платформ по лучшим ценам.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-vk"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Помощь</h4>
+                    <ul>
+                        <li><a href="#">Центр поддержки</a></li>
+                        <li><a href="#">Состояние сервиса</a></li>
+                        <li><a href="#">Политика возврата</a></li>
+                        <li><a href="#">Способы оплаты</a></li>
+                        <li><a href="#">Частые вопросы</a></li>
+                        <li><a href="#">Контакты</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Новости и акции</h4>
+                    <div class="footer-newsletter">
+                        <p>Подпишитесь, чтобы получать новости о скидках и новых играх</p>
+                        <form id="newsletter-form" onsubmit="handleNewsletter(event)">
+                            <input type="email" placeholder="Ваш email" required>
+                            <button class="btn" type="submit">Подписаться</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div>© 2023 GameStore. Все права защищены.</div>
+                <div>
+                    <a href="#" style="margin-right: 15px;">Политика конфиденциальности</a>
+                    <a href="#">Условия использования</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/common.js"></script>
+    <script src="/js/cart.js"></script>
+    <script src="/js/data.js"></script>
+</body>
+</html>

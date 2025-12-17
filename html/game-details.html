@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Детали игры - GameStore</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="/index.html" class="logo">
+                    <i class="fas fa-gamepad"></i>
+                    <span>GameStore</span>
+                </a>
+                
+                <nav>
+                    <ul>
+                        <li><a href="/index.html" class="nav-link">Главная</a></li>
+                        <li><a href="catalog.html" class="nav-link">Каталог игр</a></li>
+                        <li><a href="account.html" class="nav-link" id="account-nav-link" style="display: none;">Мой аккаунт</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="header-actions">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="search-input" placeholder="Поиск игр..." onkeypress="handleSearch(event)">
+                    </div>
+                    <div class="user-icon" id="user-icon" onclick="redirectToAuthOrAccount()">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <a href="cart.html" class="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cart-count">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Основной контент -->
+    <main class="container">
+        <div class="game-details-container">
+            <div class="game-header">
+                <h1 id="game-title">Название игры</h1>
+                <div class="game-genre" id="game-genre">Жанр игры</div>
+            </div>
+            
+            <div class="game-media">
+                <div class="video-container" id="game-video">
+                    <div class="image-placeholder">Видео превью</div>
+                </div>
+                
+                <div class="screenshots-section">
+                    <h3>Скриншоты</h3>
+                    <div class="screenshots-grid" id="game-screenshots">
+                        <!-- Скриншоты будут заполнены через JS -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="game-info">
+                <div class="game-description-section">
+                    <h3>Описание</h3>
+                    <p class="game-description" id="game-description">Описание игры будет здесь</p>
+                </div>
+                
+                <div class="game-details-section">
+                    <h3>Детали игры</h3>
+                    <div class="details-grid">
+                        <div class="detail-item">
+                            <span class="detail-label">Разработчик:</span>
+                            <span id="game-developer">Не указан</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Издатель:</span>
+                            <span id="game-publisher">Не указан</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Дата выхода:</span>
+                            <span id="game-release-date">Не указана</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Жанр:</span>
+                            <span id="game-genre-full">Не указан</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="requirements-section">
+                    <h3>Системные требования (PC)</h3>
+                    <ul class="requirements-list" id="game-requirements">
+                        <!-- Системные требования будут заполнены через JS -->
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="game-purchase">
+                <div class="price-section">
+                    <div class="price-display">
+                        <div class="current-price" id="game-price">0 ₽</div>
+                        <div class="old-price" id="game-old-price" style="display: none;">0 ₽</div>
+                        <div class="discount-badge" id="game-discount" style="display: none;">-0%</div>
+                    </div>
+                    <button class="btn btn-large" id="purchase-btn" onclick="addToCartFromDetails()">Добавить в корзину</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Подвал -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h4>GameStore</h4>
+                    <p style="color: #aaa; margin-bottom: 15px;">Лучший магазин видеоигр для истинных геймеров. Игры для всех платформ по лучшим ценам.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-vk"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Помощь</h4>
+                    <ul>
+                        <li><a href="#">Центр поддержки</a></li>
+                        <li><a href="#">Состояние сервиса</a></li>
+                        <li><a href="#">Политика возврата</a></li>
+                        <li><a href="#">Способы оплаты</a></li>
+                        <li><a href="#">Частые вопросы</a></li>
+                        <li><a href="#">Контакты</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Новости и акции</h4>
+                    <div class="footer-newsletter">
+                        <p>Подпишитесь, чтобы получать новости о скидках и новых играх</p>
+                        <form id="newsletter-form" onsubmit="handleNewsletter(event)">
+                            <input type="email" placeholder="Ваш email" required>
+                            <button class="btn" type="submit">Подписаться</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div>© 2023 GameStore. Все права защищены.</div>
+                <div>
+                    <a href="#" style="margin-right: 15px;">Политика конфиденциальности</a>
+                    <a href="#">Условия использования</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/common.js"></script>
+    <script src="/js/game-details.js"></script>
+    <script src="/js/data.js"></script>
+</body>
+</html>
